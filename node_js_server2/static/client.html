@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <title>Pusher Test</title>
+  <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('3ca1a14afda7c3610dac', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('my_event', function(data) {
+      //alert("Gifts time!");
+      var jdata = JSON.stringify(data);
+      console.log("!!!" + jdata.substring(0, 50) + "...>>>" + data.message.substring(0, 20));
+      if (data.message.indexOf('data:image/') == 0) {
+        //var imgs = document.getElementsByTagName('IMG');
+        //for (var i = 0; i < imgs.length; i++ ) {
+        //   var parent = imgs[0].parentElement;
+        //   parent.removeChild(imgs[0]);
+        //}
+        //var img = document.createElement('IMG');
+        var img = document.getElementById('view');
+        img.setAttribute('src', data.message);
+        document.body.appendChild(img);
+      } else {
+        var n1 = document.createElement("DIV");
+        var tn1 = document.createTextNode(jdata);
+        n1.appendChild(tn1);
+        var n2 = document.createElement("DIV");
+        var tn2 = document.createTextNode(data.message);
+        n2.appendChild(tn2);
+        document.body.appendChild(n1);
+        document.body.appendChild(n2);
+      }
+    });
+  </script>
+</head>
+<body>
+ <img id="view" style="width: 50%; height: 50%;" alt=" waiting for a push..."></img>
+</body>
