@@ -1,0 +1,21 @@
+{
+  "name": "hello",
+  "version": "0.0.1",
+  "description": "Simple http server with httpdispatcher",
+  "main": "hello.js",
+  "dependencies": {
+    "httpdispatcher": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node hello",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "http",
+    "server",
+    "dispatcher"
+  ],
+  "author": "Alexander Smirnov",
+  "license": "WTFPL"
+}
